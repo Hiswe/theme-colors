@@ -1,4 +1,5 @@
 <script>
+import * as colorsHelpers from '~/helpers/colors.js'
 import TcColorsList from '~/components/color-list.vue'
 import TcColorsForm from '~/components/colors-form.vue'
 import ThemeDetail from '~/components/theme-detail.vue'
@@ -18,8 +19,11 @@ export default {
     const { $axios } = nuxtContext
     try {
       const { colors, themeColors } = await $axios.$get(`/colors`)
-      console.log({ colors, themeColors })
-      return { colors, themeColors }
+      console.log({
+        colors,
+        themeColors: colorsHelpers.generateVariations(colors),
+      })
+      return { colors, themeColors: colorsHelpers.generateVariations(colors) }
     } catch (error) {
       console.log(error)
     }
@@ -39,7 +43,7 @@ export default {
           this.colors,
         )
         this.colors = colors
-        this.themeColors = themeColors
+        this.themeColors = colorsHelpers.generateVariations(colors)
       } catch (error) {
         console.log(error)
       } finally {
