@@ -9,45 +9,25 @@ export default {
   components: { TcColorsForm, TcColorsList, ThemeDetail },
   data() {
     return {
-      colors: {},
+      colors: [
+        { name: 'dark-blue', hexCode: '#2475a5', index: 5 },
+        { name: 'pink', hexCode: '#e0807c', index: 5 },
+        { name: 'yellow', hexCode: '#f29100', index: 5 },
+        { name: 'sky-blue', hexCode: '#0fb0e5', index: 5 },
+        { name: 'primary', hexCode: '#62a7a5', index: 5 },
+        { name: 'secondary', hexCode: '#18223e', index: 5 },
+        { name: 'accent', hexCode: '#87cbc9', index: 5 },
+        { name: 'error', hexCode: '#ff5252', index: 5 },
+        { name: 'info', hexCode: '#2196f3', index: 5 },
+        { name: 'success', hexCode: '#4caf50', index: 5 },
+        { name: 'warning', hexCode: '#fb8c00', index: 5 },
+      ],
       loading: false,
       themeDetailOpen: false,
       themeDetail: {},
     }
   },
-  async asyncData(nuxtContext) {
-    const { $axios } = nuxtContext
-    try {
-      const { colors } = await $axios.$get(`/colors`)
-      return { colors }
-    } catch (error) {
-      console.log(error)
-    }
-  },
-  computed: {
-    // colorsName() {
-    //   return Object.keys(this.colors)
-    // },
-    colorsNameValue() {
-      return Object.entries(this.colors).map(([key, value]) => ({
-        name: key,
-        hexCode: value,
-      }))
-    },
-  },
   methods: {
-    async updateColors() {
-      console.log(`update-Colors`)
-      this.loading = true
-      try {
-        const { colors } = await this.$axios.$post(`/colors`, this.colors)
-        this.colors = colors
-      } catch (error) {
-        console.log(error)
-      } finally {
-        this.loading = false
-      }
-    },
     showNuances(colorNuances) {
       this.themeDetail = colorNuances
       this.themeDetailOpen = true
@@ -67,9 +47,9 @@ export default {
     <div class="nuances">
       <tc-colors-list
         class="nuances__item"
-        v-for="color in colorsNameValue"
+        v-for="(color, colorIndex) in colors"
         :key="color.name"
-        :color="color"
+        v-model="colors[colorIndex]"
         @theme="showNuances"
       />
     </div>

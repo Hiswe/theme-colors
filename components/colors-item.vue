@@ -4,6 +4,7 @@ export default {
   props: {
     baseColorHex: { type: String, default: `` },
     variation: { type: Object, default: () => ({}) },
+    variationIndex: { type: Number, default: 0 },
   },
   data() {
     return {
@@ -28,9 +29,10 @@ export default {
       if (!this.isEditMode)
         this.$emit(`update:color`, this.$refs.colorInput.value)
     },
-    changeColor($event) {
-      // console.log($event.target.value)
+    changeIndex() {
+      this.$emit(`update:index`, this.variationIndex)
     },
+    changeColor($event) {},
   },
 }
 </script>
@@ -53,6 +55,7 @@ export default {
         @input="changeColor"
       />
     </template>
+    <button v-else class="tc-colors-item__index-button" @click="changeIndex">set index</button>
   </li>
 </template>
 
@@ -82,9 +85,15 @@ export default {
   border: 0;
   font-size: 1rem;
 }
+.tc-colors-item__index-button {
+  position: absolute;
+  top: var(--current-color-border);
+  right: var(--current-color-border);
+}
 .tc-colors-item__text,
 .tc-colors-item__edit-button,
-.tc-colors-item__color-input {
+.tc-colors-item__color-input,
+.tc-colors-item__index-button {
   opacity: 0;
   pointer-events: none;
 }
@@ -97,6 +106,7 @@ export default {
 }
 .tc-colors-item:not(.tc-colors-item--edition):hover .tc-colors-item__text,
 .tc-colors-item:hover .tc-colors-item__edit-button,
+.tc-colors-item:hover .tc-colors-item__index-button,
 .tc-colors-item--edition .tc-colors-item__color-input {
   opacity: 1;
   pointer-events: auto;

@@ -5,6 +5,7 @@ import TcColorsItem from '~/components/colors-item.vue'
 export default {
   name: `tc-colors-list`,
   components: { TcColorsItem },
+  model: { prop: `color`, event: `update` },
   props: { color: { type: Object, default: () => ({}) } },
   computed: {
     isValid() {
@@ -15,8 +16,11 @@ export default {
     },
   },
   methods: {
-    onOpdateColor(color) {
-      console.log(color)
+    onUpdateColor(hexCode) {
+      this.$emit(`update`, { ...this.color, hexCode })
+    },
+    onUpdateIndex(index) {
+      this.$emit(`update`, { ...this.color, index })
     },
   },
 }
@@ -32,11 +36,13 @@ export default {
     <dd class="tc-colors-list__content">
       <ol class="tc-colors-list__list">
         <tc-colors-item
-          v-for="variation in variations"
+          v-for="(variation, variationIndex) in variations"
           :baseColorHex="color.hexCode"
           :variation="variation"
+          :variation-index="variationIndex"
           :key="variation.name"
-          @update:color="onOpdateColor"
+          @update:color="onUpdateColor"
+          @update:index="onUpdateIndex"
         />
       </ol>
     </dd>
