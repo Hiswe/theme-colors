@@ -10,7 +10,7 @@ export function generateColorVariations(color = {}) {
     variations.push(intToHex(lighten(value, i)))
   }
   variations.push(intToHex(value))
-  for (let i = 1; i <= 10 - color.index - 1; ++i) {
+  for (let i = 1; i <= 10 - color.index; ++i) {
     variations.push(intToHex(darken(value, i)))
   }
   return variations.map((hexValue, index) => {
@@ -19,7 +19,7 @@ export function generateColorVariations(color = {}) {
         ? `base`
         : index <= 4
         ? `lighten-${4 - index}`
-        : `darken-${index - 4}`
+        : `darken-${index - 5}`
     return { name: `${color.name}-variationName`, variationName, hexValue }
   })
 }
