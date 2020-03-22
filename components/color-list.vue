@@ -22,7 +22,12 @@ export default {
     </dt>
     <dd class="tc-colors-list__content">
       <ol class="tc-colors-list__list">
-        <tc-colors-item :color="color" v-for="color in colorNuances.colors" :key="color.name" />
+        <tc-colors-item
+          :baseColorHex="colorNuances.baseColor"
+          :color="color"
+          v-for="color in colorNuances.colors"
+          :key="color.name"
+        />
       </ol>
     </dd>
   </dl>
