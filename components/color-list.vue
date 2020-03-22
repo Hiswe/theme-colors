@@ -1,6 +1,9 @@
 <script>
+import TcColorsItem from '~/components/colors-item.vue'
+
 export default {
   name: `tc-colors-list`,
+  components: { TcColorsItem },
   props: { colorNuances: { type: Object, default: () => ({}) } },
   computed: {
     isValid() {
@@ -18,12 +21,9 @@ export default {
       <button @click="$emit(`theme`, colorNuances)">show hexColors</button>
     </dt>
     <dd class="tc-colors-list__content">
-      <ul class="tc-colors-list__list" v-for="color in colorNuances.colors" :key="color.name">
-        <li class="tc-colors-list__item" :style="`background-color: ${color.hexValue}`">
-          <span>{{ color.variationName }}</span>
-          <span>{{ color.hexValue }}</span>
-        </li>
-      </ul>
+      <ol class="tc-colors-list__list">
+        <tc-colors-item :color="color" v-for="color in colorNuances.colors" :key="color.name" />
+      </ol>
     </dd>
   </dl>
 </template>
@@ -52,24 +52,5 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-}
-.tc-colors-list__item {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-span {
-  --outline-color: rgba(255, 255, 255, 0.65);
-  font-weight: bold;
-  text-shadow: -1px -1px 0 var(--outline-color), 1px -1px 0 var(--outline-color),
-    -1px 1px 0 var(--outline-color), 1px 1px 0 var(--outline-color);
-  opacity: 0;
-}
-li:hover span {
-  opacity: 1;
-}
-dd {
-  flex: 1 1 auto;
 }
 </style>
