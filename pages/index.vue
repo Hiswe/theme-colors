@@ -1,9 +1,10 @@
 <script>
-import ColorsList from '~/components/color-list.vue'
+import TcColorsList from '~/components/color-list.vue'
+import TcColorsForm from '~/components/colors-form.vue'
 import ThemeDetail from '~/components/theme-detail.vue'
 
 export default {
-  components: { ColorsList, ThemeDetail },
+  components: { TcColorsForm, TcColorsList, ThemeDetail },
   data() {
     return {
       colors: {},
@@ -60,17 +61,9 @@ export default {
 
 <template>
   <div class="container">
-    <form class="color-form" @submit.prevent="updateColors">
-      <div class="color-form__inputs">
-        <label class="color-form__input" v-for="colorName in colorsName" :key="colorName">
-          <p>{{ colorName }}</p>
-          <input type="color" v-model="colors[colorName]" />
-        </label>
-      </div>
-      <button class="color-form__button" type="submit">update</button>
-    </form>
+    <tc-colors-form v-model="colors" @submit="updateColors" />
     <div class="nuances">
-      <colors-list
+      <tc-colors-list
         class="nuances__item"
         v-for="theme in themeColors"
         :key="theme.name"
@@ -87,31 +80,19 @@ export default {
   margin: 0 auto;
   min-height: 100vh;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 .nuances {
   display: flex;
-  margin-top: 1rem;
+  margin: 0rem;
+  min-height: 0;
+  flex: 1 1 auto;
+  align-items: stretch;
 }
 .nuances__item {
-  width: 10vw;
-  flex: 1 1 auto;
-  min-width: 0;
-}
-.color-form {
-  padding: 1rem;
-}
-.color-form__inputs {
-  display: flex;
-}
-.color-form__input {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-.color-form__button {
-  display: block;
-  padding: 0.5rem;
-  width: 100%;
-  font-size: inherit;
-  margin-top: 1rem;
+  /* width: 10vw; */
+  /* flex: 1 1 auto; */
+  /* min-width: 0; */
 }
 </style>
