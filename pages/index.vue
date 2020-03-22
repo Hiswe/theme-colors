@@ -90,9 +90,4 @@ export default {
   flex: 1 1 auto;
   align-items: stretch;
 }
-.nuances__item {
-  /* width: 10vw; */
-  /* flex: 1 1 auto; */
-  /* min-width: 0; */
-}
 </style>
