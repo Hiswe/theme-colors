@@ -3,7 +3,7 @@ export default {
   name: `tc-colors-item`,
   props: {
     baseColorHex: { type: String, default: `` },
-    color: { type: Object, default: () => ({}) },
+    variation: { type: Object, default: () => ({}) },
   },
   data() {
     return {
@@ -12,7 +12,7 @@ export default {
   },
   computed: {
     isBaseColor() {
-      return this.color.hexValue === this.baseColorHex
+      return this.variation.hexValue === this.baseColorHex
     },
     componentClasses() {
       return {
@@ -39,17 +39,17 @@ export default {
   <li
     class="tc-colors-item"
     :class="componentClasses"
-    :style="`background-color: ${color.hexValue}`"
+    :style="`background-color: ${variation.hexValue}`"
   >
-    <span class="tc-colors-item__text">{{ color.variationName }}</span>
-    <span class="tc-colors-item__text">{{ color.hexValue }}</span>
+    <span class="tc-colors-item__text">{{ variation.variationName }}</span>
+    <span class="tc-colors-item__text">{{ variation.hexValue }}</span>
     <template v-if="isBaseColor">
       <button class="tc-colors-item__edit-button" @click="toggleEdit">{{ isEditMode ? `✅` : `✏️` }}</button>
       <input
         class="tc-colors-item__color-input"
         type="color"
         ref="colorInput"
-        :value="color.hexValue"
+        :value="variation.hexValue"
         @input="changeColor"
       />
     </template>

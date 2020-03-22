@@ -5,11 +5,11 @@ import TcColorsForm from '~/components/colors-form.vue'
 import ThemeDetail from '~/components/theme-detail.vue'
 
 export default {
+  name: `page-index`,
   components: { TcColorsForm, TcColorsList, ThemeDetail },
   data() {
     return {
       colors: {},
-      themeColors: {},
       loading: false,
       themeDetailOpen: false,
       themeDetail: {},
@@ -18,15 +18,21 @@ export default {
   async asyncData(nuxtContext) {
     const { $axios } = nuxtContext
     try {
-      const { colors, themeColors } = await $axios.$get(`/colors`)
-      return { colors, themeColors: colorsHelpers.generateVariations(colors) }
+      const { colors } = await $axios.$get(`/colors`)
+      return { colors }
     } catch (error) {
       console.log(error)
     }
   },
   computed: {
-    colorsName() {
-      return Object.keys(this.colors)
+    // colorsName() {
+    //   return Object.keys(this.colors)
+    // },
+    colorsNameValue() {
+      return Object.entries(this.colors).map(([key, value]) => ({
+        name: key,
+        hexCode: value,
+      }))
     },
   },
   methods: {
@@ -34,12 +40,8 @@ export default {
       console.log(`update-Colors`)
       this.loading = true
       try {
-        const { colors, themeColors } = await this.$axios.$post(
-          `/colors`,
-          this.colors,
-        )
+        const { colors } = await this.$axios.$post(`/colors`, this.colors)
         this.colors = colors
-        this.themeColors = colorsHelpers.generateVariations(colors)
       } catch (error) {
         console.log(error)
       } finally {
@@ -61,17 +63,17 @@ export default {
 
 <template>
   <div class="container">
-    <tc-colors-form v-model="colors" @submit="updateColors" />
+    <!-- <tc-colors-form v-model="colors" @submit="updateColors" /> -->
     <div class="nuances">
       <tc-colors-list
         class="nuances__item"
-        v-for="theme in themeColors"
-        :key="theme.name"
-        :color-nuances="theme"
+        v-for="color in colorsNameValue"
+        :key="color.name"
+        :color="color"
         @theme="showNuances"
       />
     </div>
-    <theme-detail @close="hideNuances" :open="themeDetailOpen" :color-nuances="themeDetail" />
+    <!-- <theme-detail @close="hideNuances" :open="themeDetailOpen" :color-nuances="themeDetail" /> -->
   </div>
 </template>
 

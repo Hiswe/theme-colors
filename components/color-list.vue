@@ -1,13 +1,17 @@
 <script>
+import * as colorsHelpers from '~/helpers/colors.js'
 import TcColorsItem from '~/components/colors-item.vue'
 
 export default {
   name: `tc-colors-list`,
   components: { TcColorsItem },
-  props: { colorNuances: { type: Object, default: () => ({}) } },
+  props: { color: { type: Object, default: () => ({}) } },
   computed: {
     isValid() {
-      return Array.isArray(this.colorNuances.colors)
+      return true
+    },
+    variations() {
+      return colorsHelpers.generateColorVariations(this.color)
     },
   },
   methods: {
@@ -21,17 +25,17 @@ export default {
 <template>
   <dl class="tc-colors-list">
     <dt class="tc-colors-list__header">
-      <p>{{ colorNuances.name }}</p>
-      <p>{{ colorNuances.baseColor }}</p>
-      <button @click="$emit(`theme`, colorNuances)">show hexColors</button>
+      <p>{{ color.name }}</p>
+      <p>{{ color.hexCode }}</p>
+      <!-- <button @click="$emit(`theme`, color)">show hexColors</button> -->
     </dt>
     <dd class="tc-colors-list__content">
       <ol class="tc-colors-list__list">
         <tc-colors-item
-          :baseColorHex="colorNuances.baseColor"
-          :color="color"
-          v-for="color in colorNuances.colors"
-          :key="color.name"
+          v-for="variation in variations"
+          :baseColorHex="color.hexCode"
+          :variation="variation"
+          :key="variation.name"
           @update:color="onOpdateColor"
         />
       </ol>

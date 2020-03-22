@@ -3,25 +3,21 @@ import { intToHex, colorToInt } from 'vuetify/es5/util/colorUtils.js'
 import * as LAB from 'vuetify/es5/util/color/transformCIELAB.js'
 import * as sRGB from 'vuetify/es5/util/color/transformSRGB.js'
 
-export function generateVariations(colors = {}) {
-  const themeColors = Object.entries(colors).map(([colorName, colorValue]) => {
-    const variations = genVariations(colorName, colorToInt(colorValue))
-    const colors = Object.entries(variations).map(
-      ([variationName, variationColor]) => {
-        return {
-          name: `${colorName}-${variationName}`,
-          variationName,
-          hexValue: variationColor,
-        }
-      },
-    )
-    return {
-      name: colorName,
-      baseColor: colorValue,
-      colors,
-    }
-  })
-  return themeColors
+export function generateColorVariations({
+  name: colorName,
+  hexCode: colorValue,
+} = {}) {
+  const variations = genVariations(colorName, colorToInt(colorValue))
+  const colors = Object.entries(variations).map(
+    ([variationName, variationColor]) => {
+      return {
+        name: `${colorName}-${variationName}`,
+        variationName,
+        hexValue: variationColor,
+      }
+    },
+  )
+  return colors
 }
 
 // COPY FROM VUETIFY
