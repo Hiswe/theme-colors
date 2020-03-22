@@ -106,6 +106,7 @@ export default {
 }
 .tc-colors-item:not(.tc-colors-item--edition):hover .tc-colors-item__text,
 .tc-colors-item:hover .tc-colors-item__edit-button,
+.tc-colors-item--edition .tc-colors-item__edit-button,
 .tc-colors-item:hover .tc-colors-item__index-button,
 .tc-colors-item--edition .tc-colors-item__color-input {
   opacity: 1;

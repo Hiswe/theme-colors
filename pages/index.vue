@@ -1,12 +1,11 @@
 <script>
 import * as colorsHelpers from '~/helpers/colors.js'
 import TcColorsList from '~/components/color-list.vue'
-import TcColorsForm from '~/components/colors-form.vue'
 import ThemeDetail from '~/components/theme-detail.vue'
 
 export default {
   name: `page-index`,
-  components: { TcColorsForm, TcColorsList, ThemeDetail },
+  components: { TcColorsList, ThemeDetail },
   data() {
     return {
       colors: [
@@ -17,6 +16,7 @@ export default {
         { name: 'primary', hexCode: '#62a7a5', index: 5 },
         { name: 'secondary', hexCode: '#18223e', index: 5 },
         { name: 'accent', hexCode: '#87cbc9', index: 5 },
+        { name: 'grey', hexCode: '#777777', index: 5 },
         { name: 'error', hexCode: '#ff5252', index: 5 },
         { name: 'info', hexCode: '#2196f3', index: 5 },
         { name: 'success', hexCode: '#4caf50', index: 5 },
@@ -25,7 +25,13 @@ export default {
       loading: false,
       themeDetailOpen: false,
       themeDetail: {},
+      isGrey: false,
     }
+  },
+  computed: {
+    nuancesClasses() {
+      return { 'nuances--grey': this.isGrey }
+    },
   },
   methods: {
     showNuances(colorNuances) {
@@ -43,8 +49,13 @@ export default {
 
 <template>
   <div class="container">
-    <!-- <tc-colors-form v-model="colors" @submit="updateColors" /> -->
-    <div class="nuances">
+    <header class="header">
+      <label>
+        <input type="checkbox" name="grey-toggle" id="grey-toggle" v-model="isGrey" />
+        check grey values
+      </label>
+    </header>
+    <div class="nuances" :class="nuancesClasses">
       <tc-colors-list
         class="nuances__item"
         v-for="(color, colorIndex) in colors"
@@ -65,11 +76,20 @@ export default {
   display: flex;
   flex-direction: column;
 }
+.header {
+  background: #333;
+  text-align: right;
+  padding: 1rem;
+  color: white;
+}
 .nuances {
   display: flex;
   margin: 0rem;
   min-height: 0;
   flex: 1 1 auto;
   align-items: stretch;
+}
+.nuances--grey {
+  filter: grayscale();
 }
 </style>
