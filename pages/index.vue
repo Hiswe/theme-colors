@@ -19,10 +19,6 @@ export default {
     const { $axios } = nuxtContext
     try {
       const { colors, themeColors } = await $axios.$get(`/colors`)
-      console.log({
-        colors,
-        themeColors: colorsHelpers.generateVariations(colors),
-      })
       return { colors, themeColors: colorsHelpers.generateVariations(colors) }
     } catch (error) {
       console.log(error)

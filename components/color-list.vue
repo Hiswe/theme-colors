@@ -10,6 +10,11 @@ export default {
       return Array.isArray(this.colorNuances.colors)
     },
   },
+  methods: {
+    onOpdateColor(color) {
+      console.log(color)
+    },
+  },
 }
 </script>
 
@@ -27,6 +32,7 @@ export default {
           :color="color"
           v-for="color in colorNuances.colors"
           :key="color.name"
+          @update:color="onOpdateColor"
         />
       </ol>
     </dd>
