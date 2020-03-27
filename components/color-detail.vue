@@ -1,4 +1,7 @@
 <script>
+// https://markrabey.github.io/kwulers/
+import * as kwulers from 'kwulers'
+
 import * as colorsHelpers from '~/helpers/colors.js'
 import TcColorTestNuances from '~/components/color-text-nuances.vue'
 
@@ -16,8 +19,25 @@ export default {
     colorHexList() {
       return this.variations.map((c) => c.hexValue)
     },
-    colorRgb() {
-      return this.variations.map((c) => `rgb(${c.rgbValues.join(`,`)})`)
+    colorRgbList() {
+      return this.variations
+        .map((c) => kwulers.getRGBFromHex(c.hexValue))
+        .map((rgb) => `rgb(${rgb.join(`, `)})`)
+    },
+    cmykList() {
+      return this.variations.map((c) => {
+        return (
+          kwulers
+            .getCMYKFromHex(c.hexValue)
+            // sometimes value is NaN (full mega black)
+            .map((value) =>
+              Number.isNaN(value) ? 100 : Math.round(value * 100),
+            )
+        )
+      })
+    },
+    colorCmykList() {
+      return this.cmykList.map((cmyk) => `cmyk(${cmyk.join(`, `)})`)
     },
     colorMeaningfulCss() {
       return this.variations.map((c) => `--${c.meaningfulName}: ${c.hexValue};`)
@@ -46,7 +66,12 @@ export default {
         <tc-color-test-nuances
           class="ts-color-detail__section"
           title="Colors (RGB)"
-          :nuances="colorRgb"
+          :nuances="colorRgbList"
+        />
+        <tc-color-test-nuances
+          class="ts-color-detail__section"
+          title="Colors (CMYK)"
+          :nuances="colorCmykList"
         />
         <tc-color-test-nuances
           class="ts-color-detail__section"

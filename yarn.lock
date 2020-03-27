@@ -4272,6 +4272,11 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
+kwulers@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/kwulers/-/kwulers-0.1.0.tgz#9f1628ae7737250a86383c22b45e180b339499ca"
+  integrity sha512-DA9WPgIAMWtjXfXMhDTgIFBfI+Hsam62ZC5Q6HEHRPMsdgXckNmZwel5VpfvlRRw/jR2IAflDCvZYTNP1zaoCw==
+
 last-call-webpack-plugin@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/last-call-webpack-plugin/-/last-call-webpack-plugin-3.0.0.tgz#9742df0e10e3cf46e5c0381c2de90d3a7a2d7555"

@@ -44,13 +44,11 @@ export function generateColorVariations(color = {}) {
   }
   return variations.map((hexValue, nuanceIndex) => {
     const nuanceNames = getNuanceNames(nuanceIndex)
-    const { r, g, b } = colorUtils.HexToRGBA(hexValue)
     return {
       name: `${color.name}-${nuanceNames.name}`,
       meaningfulName: `${color.name}-${nuanceNames.meaningfulName}`,
       nuanceNames,
       hexValue,
-      rgbValues: [r, g, b],
     }
   })
 }
