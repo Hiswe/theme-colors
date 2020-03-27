@@ -29,6 +29,9 @@ export default {
     }
   },
   computed: {
+    mainClasses() {
+      return { 'container--blurred': this.colorDetailOpen }
+    },
     nuancesClasses() {
       return { 'nuances--grey': this.isGrey }
     },
@@ -49,32 +52,37 @@ export default {
 
 <template>
   <div class="container">
-    <header class="header">
-      <label>
-        <input type="checkbox" name="grey-toggle" id="grey-toggle" v-model="isGrey" />
-        check grey values
-      </label>
-    </header>
-    <div class="nuances" :class="nuancesClasses">
-      <tc-colors-list
-        class="nuances__item"
-        v-for="(color, colorIndex) in colors"
-        :key="color.name"
-        v-model="colors[colorIndex]"
-        @theme="showNuances"
-      />
-    </div>
+    <main class="main" :class="mainClasses">
+      <header class="header">
+        <label>
+          <input type="checkbox" name="grey-toggle" id="grey-toggle" v-model="isGrey" />
+          check grey values
+        </label>
+      </header>
+      <div class="nuances" :class="nuancesClasses">
+        <tc-colors-list
+          class="nuances__item"
+          v-for="(color, colorIndex) in colors"
+          :key="color.name"
+          v-model="colors[colorIndex]"
+          @theme="showNuances"
+        />
+      </div>
+    </main>
     <ts-color-detail @close="hideNuances" :open="colorDetailOpen" :color="colorDetail" />
   </div>
 </template>
 
 <style scoped>
-.container {
+.main {
   margin: 0 auto;
   min-height: 100vh;
   text-align: center;
   display: flex;
   flex-direction: column;
+}
+.main--blurred {
+  filter: blur(2px);
 }
 .header {
   background: #333;
