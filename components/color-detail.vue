@@ -53,6 +53,7 @@ export default {
           title="CSS (meaningful)"
           :nuances="colorMeaningfulCss"
         />
+        <div class="ts-color-detail__section"></div>
         <tc-color-test-nuances class="ts-color-detail__section" title="CSS" :nuances="colorCss" />
       </dd>
     </dl>
@@ -61,7 +62,7 @@ export default {
 
 <style scoped>
 .ts-color-detail {
-  --panel-gutter: 5rem;
+  --panel-gutter: 2rem;
   --panel-left-width: 12rem;
   position: fixed;
   top: 0;

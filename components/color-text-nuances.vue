@@ -29,7 +29,7 @@ export default {
         </svg>
       </button>
     </header>
-    <p v-html="htmlContent" />
+    <p class="tc-color-text-nuances__list" v-html="htmlContent" />
   </div>
 </template>
 
@@ -44,5 +44,8 @@ export default {
 .tc-color-text-nuances__button-copy svg {
   height: 1rem;
   width: auto;
+}
+.tc-color-text-nuances__list {
+  white-space: nowrap;
 }
 </style>
