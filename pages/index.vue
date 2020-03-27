@@ -1,11 +1,11 @@
 <script>
 import * as colorsHelpers from '~/helpers/colors.js'
 import TcColorsList from '~/components/color-list.vue'
-import ThemeDetail from '~/components/theme-detail.vue'
+import TsColorDetail from '~/components/color-detail.vue'
 
 export default {
   name: `page-index`,
-  components: { TcColorsList, ThemeDetail },
+  components: { TcColorsList, TsColorDetail },
   data() {
     return {
       colors: [
@@ -23,8 +23,8 @@ export default {
         { name: 'warning', hexCode: '#fb8c00', index: 5 },
       ],
       loading: false,
-      themeDetailOpen: false,
-      themeDetail: {},
+      colorDetailOpen: false,
+      colorDetail: {},
       isGrey: false,
     }
   },
@@ -34,14 +34,14 @@ export default {
     },
   },
   methods: {
-    showNuances(colorNuances) {
-      this.themeDetail = colorNuances
-      this.themeDetailOpen = true
+    showNuances(color) {
+      this.colorDetail = color
+      this.colorDetailOpen = true
     },
 
     hideNuances() {
-      this.themeDetailOpen = false
-      this.themeDetail = {}
+      this.colorDetailOpen = false
+      this.colorDetail = {}
     },
   },
 }
@@ -64,11 +64,11 @@ export default {
         @theme="showNuances"
       />
     </div>
-    <!-- <theme-detail @close="hideNuances" :open="themeDetailOpen" :color-nuances="themeDetail" /> -->
+    <ts-color-detail @close="hideNuances" :open="colorDetailOpen" :color="colorDetail" />
   </div>
 </template>
 
-<style>
+<style scoped>
 .container {
   margin: 0 auto;
   min-height: 100vh;
@@ -81,6 +81,7 @@ export default {
   text-align: right;
   padding: 1rem;
   color: white;
+  height: var(--header-height);
 }
 .nuances {
   display: flex;

@@ -30,8 +30,7 @@ export default {
   <dl class="tc-colors-list">
     <dt class="tc-colors-list__header">
       <p>{{ color.name }}</p>
-      <p>{{ color.hexCode }}</p>
-      <!-- <button @click="$emit(`theme`, color)">show hexColors</button> -->
+      <button @click="$emit(`theme`, color)">show hexColors</button>
     </dt>
     <dd class="tc-colors-list__content">
       <ol class="tc-colors-list__list">
@@ -61,6 +60,8 @@ export default {
 }
 .tc-colors-list__header {
   flex: 0 0 auto;
+  background: #222;
+  color: white;
 }
 .tc-colors-list__content {
   display: contents;
@@ -73,5 +74,16 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+}
+.tc-colors-list__list::before,
+.tc-colors-list__list::after {
+  content: '';
+  min-height: 2rem;
+}
+.tc-colors-list__list::before {
+  background: white;
+}
+.tc-colors-list__list::after {
+  background: black;
 }
 </style>
