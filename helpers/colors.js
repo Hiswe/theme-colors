@@ -1,20 +1,20 @@
 // import the same Vuetify colors helpers for coherent branding
-import { intToHex, colorToInt } from 'vuetify/es5/util/colorUtils.js'
+import * as colorUtils from 'vuetify/es5/util/colorUtils.js'
 import * as LAB from 'vuetify/es5/util/color/transformCIELAB.js'
 import * as sRGB from 'vuetify/es5/util/color/transformSRGB.js'
 
 const COLOR_INDEX_TO_MEANINGFUL_NAME = [
-  `white`,
   `whitest`,
   `whiter`,
+  `white`,
   `lightest`,
   `lighter`,
   `base`,
   `darker`,
   `darkest`,
+  `black,`,
   `blacker`,
   `blackest`,
-  `black,`,
 ]
 
 function getNuanceNames(nuanceIndex) {
@@ -34,21 +34,23 @@ function getNuanceNames(nuanceIndex) {
 export function generateColorVariations(color = {}) {
   const variations = []
   if (color.hexCode == null) return variations
-  const value = colorToInt(color.hexCode)
+  const value = colorUtils.colorToInt(color.hexCode)
   for (let i = color.index; i > 0; --i) {
-    variations.push(intToHex(lighten(value, i)))
+    variations.push(colorUtils.intToHex(lighten(value, i)))
   }
-  variations.push(intToHex(value))
+  variations.push(colorUtils.intToHex(value))
   for (let i = 1; i <= 10 - color.index; ++i) {
-    variations.push(intToHex(darken(value, i)))
+    variations.push(colorUtils.intToHex(darken(value, i)))
   }
   return variations.map((hexValue, nuanceIndex) => {
     const nuanceNames = getNuanceNames(nuanceIndex)
+    const { r, g, b } = colorUtils.HexToRGBA(hexValue)
     return {
       name: `${color.name}-${nuanceNames.name}`,
       meaningfulName: `${color.name}-${nuanceNames.meaningfulName}`,
       nuanceNames,
       hexValue,
+      rgbValues: [r, g, b],
     }
   })
 }

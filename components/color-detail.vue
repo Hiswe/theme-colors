@@ -1,8 +1,10 @@
 <script>
 import * as colorsHelpers from '~/helpers/colors.js'
+import TcColorTestNuances from '~/components/color-text-nuances.vue'
 
 export default {
   name: `ts-color-detail`,
+  components: { TcColorTestNuances },
   props: {
     color: { type: Object, default: () => ({}) },
     open: false,
@@ -12,17 +14,16 @@ export default {
       return colorsHelpers.generateColorVariations(this.color)
     },
     colorHexList() {
-      return this.variations.map((c) => c.hexValue).join(`<br />`)
+      return this.variations.map((c) => c.hexValue)
+    },
+    colorRgb() {
+      return this.variations.map((c) => `rgb(${c.rgbValues.join(`,`)})`)
     },
     colorMeaningfulCss() {
-      return this.variations
-        .map((c) => `--${c.meaningfulName}: ${c.hexValue};`)
-        .join(`<br />`)
+      return this.variations.map((c) => `--${c.meaningfulName}: ${c.hexValue};`)
     },
     colorCss() {
-      return this.variations
-        .map((c) => `--${c.name}: ${c.hexValue};`)
-        .join(`<br />`)
+      return this.variations.map((c) => `--${c.name}: ${c.hexValue};`)
     },
   },
 }
@@ -37,18 +38,22 @@ export default {
         <button @click="$emit(`close`)">close</button>
       </dt>
       <dd class="ts-color-detail__values">
-        <div class="ts-color-detail__section">
-          <h5>Colors</h5>
-          <p v-html="colorHexList" />
-        </div>
-        <div class="ts-color-detail__section">
-          <h5>CSS (meaningful)</h5>
-          <p v-html="colorMeaningfulCss" />
-        </div>
-        <div class="ts-color-detail__section">
-          <h5>CSS</h5>
-          <p v-html="colorCss" />
-        </div>
+        <tc-color-test-nuances
+          class="ts-color-detail__section"
+          title="Colors (HEX)"
+          :nuances="colorHexList"
+        />
+        <tc-color-test-nuances
+          class="ts-color-detail__section"
+          title="Colors (RGB)"
+          :nuances="colorRgb"
+        />
+        <tc-color-test-nuances
+          class="ts-color-detail__section"
+          title="CSS (meaningful)"
+          :nuances="colorMeaningfulCss"
+        />
+        <tc-color-test-nuances class="ts-color-detail__section" title="CSS" :nuances="colorCss" />
       </dd>
     </dl>
   </aside>
