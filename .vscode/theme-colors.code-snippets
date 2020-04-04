@@ -22,7 +22,7 @@
       "<script>",
       "export default {",
       "\tname: `tc-${1:name}`,",
-      "};",
+      "}",
       "</script>",
       "",
       "<template>",

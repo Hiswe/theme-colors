@@ -46,7 +46,7 @@ export default {
     <span class="tc-colors-item__text">{{ variation.hexValue }}</span>
     <template v-if="isBaseColor">
       <button class="tc-colors-item__edit-button" @click="toggleEdit">
-        {{ isEditMode ? `✅` : `✏️` }}
+        <tc-icon :name="isEditMode ? `done` : `create`" />
       </button>
       <input
         class="tc-colors-item__color-input"

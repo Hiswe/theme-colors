@@ -30,7 +30,9 @@ export default {
   <dl class="tc-colors-list">
     <dt class="tc-colors-list__header">
       <p>{{ color.name }}</p>
-      <button @click="$emit(`theme`, color)">details</button>
+      <button @click="$emit(`theme`, color)">
+        <tc-icon name="visibility" />
+      </button>
     </dt>
     <dd class="tc-colors-list__content">
       <ol class="tc-colors-list__list">

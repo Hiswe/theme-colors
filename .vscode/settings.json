@@ -5,6 +5,5 @@
   },
   "prettier.packageManager": "yarn",
   "prettier.useEditorConfig": false,
-  "editor.formatOnPaste": true,
-  "eslint.format.enable": true
+  "editor.formatOnPaste": true
 }
