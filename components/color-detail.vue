@@ -79,7 +79,11 @@ export default {
           :nuances="colorMeaningfulCss"
         />
         <div class="ts-color-detail__section"></div>
-        <tc-color-test-nuances class="ts-color-detail__section" title="CSS" :nuances="colorCss" />
+        <tc-color-test-nuances
+          class="ts-color-detail__section"
+          title="CSS"
+          :nuances="colorCss"
+        />
       </dd>
     </dl>
   </aside>

@@ -1,4 +1,4 @@
-const rc = require('rc')
+const rc = require(`rc`)
 
 const config = rc(`tc`, {
   PORT: 3666,

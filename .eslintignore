@@ -1,0 +1,5 @@
+!.eslintignore
+
+.nuxt
+.vscode
+node_modules

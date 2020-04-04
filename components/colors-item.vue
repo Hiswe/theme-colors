@@ -46,7 +46,9 @@ export default {
     <span class="tc-colors-item__text">{{ variation.variationName }}</span>
     <span class="tc-colors-item__text">{{ variation.hexValue }}</span>
     <template v-if="isBaseColor">
-      <button class="tc-colors-item__edit-button" @click="toggleEdit">{{ isEditMode ? `✅` : `✏️` }}</button>
+      <button class="tc-colors-item__edit-button" @click="toggleEdit">
+        {{ isEditMode ? `✅` : `✏️` }}
+      </button>
       <input
         class="tc-colors-item__color-input"
         type="color"
@@ -55,7 +57,9 @@ export default {
         @input="changeColor"
       />
     </template>
-    <button v-else class="tc-colors-item__index-button" @click="changeIndex">set index</button>
+    <button v-else class="tc-colors-item__index-button" @click="changeIndex">
+      set index
+    </button>
   </li>
 </template>
 
