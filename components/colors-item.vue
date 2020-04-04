@@ -2,7 +2,7 @@
 export default {
   name: `tc-colors-item`,
   props: {
-    baseColorHex: { type: String, default: `` },
+    color: { type: Object, default: () => ({}) },
     variation: { type: Object, default: () => ({}) },
     variationIndex: { type: Number, default: 0 },
   },
@@ -13,7 +13,7 @@ export default {
   },
   computed: {
     isBaseColor() {
-      return this.variation.hexValue === this.baseColorHex
+      return this.variationIndex === this.color.index
     },
     componentClasses() {
       return {
@@ -61,7 +61,7 @@ export default {
 
 <style scoped>
 .tc-colors-item {
-  --current-color-border: 5px;
+  --current-color-border: 3px;
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;

@@ -36,6 +36,7 @@ export default {
       <ol class="tc-colors-list__list">
         <tc-colors-item
           v-for="(variation, variationIndex) in variations"
+          :color="color"
           :baseColorHex="color.hexCode"
           :variation="variation"
           :variation-index="variationIndex"
