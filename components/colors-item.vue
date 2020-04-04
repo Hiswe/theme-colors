@@ -25,9 +25,8 @@ export default {
   methods: {
     toggleEdit() {
       this.isEditMode = !this.isEditMode
-      if (this.isEditMode) this.$refs.colorInput.focus()
-      if (!this.isEditMode)
-        this.$emit(`update:color`, this.$refs.colorInput.value)
+      if (this.isEditMode) return this.$refs.colorInput.focus()
+      this.$emit(`update:color`, this.$refs.colorInput.value)
     },
     changeIndex() {
       this.$emit(`update:index`, this.variationIndex)
