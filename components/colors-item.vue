@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: `tc-colors-item`,
+  name: `TcColorsItem`,
   props: {
     color: { type: Object, default: () => ({}) },
     variation: { type: Object, default: () => ({}) },
@@ -49,9 +49,9 @@ export default {
         <tc-icon :name="isEditMode ? `done` : `create`" />
       </button>
       <input
+        ref="colorInput"
         class="tc-colors-item__color-input"
         type="color"
-        ref="colorInput"
         :value="variation.hexValue"
         @input="changeColor"
       />

@@ -3,7 +3,7 @@ import * as colorsHelpers from '~/helpers/colors.js'
 import TcColorsItem from '~/components/colors-item.vue'
 
 export default {
-  name: `tc-colors-list`,
+  name: `TcColorsList`,
   components: { TcColorsItem },
   model: { prop: `color`, event: `update` },
   props: { color: { type: Object, default: () => ({}) } },
@@ -38,11 +38,11 @@ export default {
       <ol class="tc-colors-list__list">
         <tc-colors-item
           v-for="(variation, variationIndex) in variations"
+          :key="variation.name"
           :color="color"
-          :baseColorHex="color.hexCode"
+          :base-color-hex="color.hexCode"
           :variation="variation"
           :variation-index="variationIndex"
-          :key="variation.name"
           @update:color="onUpdateColor"
           @update:index="onUpdateIndex"
         />

@@ -1,10 +1,9 @@
 <script>
-import * as colorsHelpers from '~/helpers/colors.js'
 import TcColorsList from '~/components/color-list.vue'
 import TsColorDetail from '~/components/color-detail.vue'
 
 export default {
-  name: `page-index`,
+  name: `PageIndex`,
   components: { TcColorsList, TsColorDetail },
   data() {
     return {
@@ -58,28 +57,28 @@ export default {
       <header class="header">
         <label>
           <input
-            type="checkbox"
-            name="grey-toggle"
             id="grey-toggle"
             v-model="isGrey"
+            type="checkbox"
+            name="grey-toggle"
           />
           check grey values
         </label>
       </header>
       <div class="nuances" :class="nuancesClasses">
         <tc-colors-list
-          class="nuances__item"
           v-for="(color, colorIndex) in colors"
           :key="color.name"
           v-model="colors[colorIndex]"
+          class="nuances__item"
           @theme="showNuances"
         />
       </div>
     </main>
     <ts-color-detail
-      @close="hideNuances"
       :open="colorDetailOpen"
       :color="colorDetail"
+      @close="hideNuances"
     />
   </div>
 </template>

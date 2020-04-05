@@ -1,9 +1,4 @@
 {
-  "editor.formatOnSave": false,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
-  "prettier.packageManager": "yarn",
-  "prettier.useEditorConfig": false,
-  "editor.formatOnPaste": true
+  "editor.formatOnSave": true,
+  "cSpell.words": ["nuxtjs"]
 }

@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: `tc-color-text-nuances`,
+  name: `TcColorTextNuances`,
   props: {
     title: { type: String, default: `` },
     nuances: { type: Array, default: () => [] },
@@ -19,10 +19,10 @@ export default {
 <template>
   <div class="tc-color-text-nuances">
     <header class="tc-color-text-nuances__header">
-      <h5 v-text="title" class="tc-color-text-nuances__title" />
+      <h5 class="tc-color-text-nuances__title" v-text="title" />
       <button
-        class="tc-color-text-nuances__button-copy"
         v-clipboard:copy="copyContent"
+        class="tc-color-text-nuances__button-copy"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -37,6 +37,7 @@ export default {
         </svg>
       </button>
     </header>
+    <!-- eslint-disable-next-line vue/no-v-html -->
     <p class="tc-color-text-nuances__list" v-html="htmlContent" />
   </div>
 </template>

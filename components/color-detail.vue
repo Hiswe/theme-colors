@@ -6,11 +6,11 @@ import * as colorsHelpers from '~/helpers/colors.js'
 import TcColorTestNuances from '~/components/color-text-nuances.vue'
 
 export default {
-  name: `ts-color-detail`,
+  name: `TsColorDetail`,
   components: { TcColorTestNuances },
   props: {
     color: { type: Object, default: () => ({}) },
-    open: false,
+    open: { type: Boolean, default: false },
   },
   computed: {
     variations() {
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <template>
-  <aside class="ts-color-detail" v-if="open">
+  <aside v-if="open" class="ts-color-detail">
     <dl class="ts-color-detail__content">
       <dt class="ts-color-detail__left-bar">
         <h3 class="ts-color-detail__name">{{ color.name }}</h3>

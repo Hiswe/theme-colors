@@ -1,7 +1,9 @@
 <script>
 export default {
-  name: `tc-icon`,
-  props: { name: String, required: true },
+  name: `TcIcon`,
+  props: {
+    name: { type: String, required: true },
+  },
 }
 </script>
 
