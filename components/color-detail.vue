@@ -1,4 +1,5 @@
 <script>
+import slugify from '@sindresorhus/slugify'
 // https://markrabey.github.io/kwulers/
 import * as kwulers from 'kwulers'
 
@@ -43,6 +44,19 @@ export default {
       return this.variations.map((c) => `--${c.name}: ${c.hexValue};`)
     },
   },
+  methods: {
+    // https://stackoverflow.com/a/20194533
+    downloadSvg() {
+      const a = window.document.createElement(`a`)
+      a.href = window.URL.createObjectURL(
+        new Blob([this.$refs.svg.$el.outerHTML], { type: `text/svg` }),
+      )
+      a.download = `${slugify(this.color.name)}.svg`
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+    },
+  },
 }
 </script>
 
@@ -63,7 +77,10 @@ export default {
         </tc-button>
       </dt>
       <dd class="ts-color-detail__svg">
-        <tc-nuances-svg :color="color" :nuances="variations" />
+        <tc-nuances-svg ref="svg" :color="color" :nuances="variations" />
+        <tc-button class="ts-color-detail__download-svg" @click="downloadSvg">
+          download
+        </tc-button>
       </dd>
       <dd class="ts-color-detail__values">
         <tc-nuances-text
@@ -156,6 +173,12 @@ export default {
   margin: 0;
   object-fit: contain;
   text-align: left;
+  position: relative;
+}
+.ts-color-detail__download-svg {
+  position: absolute;
+  top: var(--pannel-padding);
+  right: var(--pannel-padding);
 }
 .tc-nuances-svg {
   display: block;
