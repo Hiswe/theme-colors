@@ -15,19 +15,19 @@ export default {
     open: { type: Boolean, default: false },
   },
   computed: {
-    variations() {
+    nuances() {
       return colorsHelpers.generateColorVariations(this.color)
     },
     colorHexList() {
-      return this.variations.map((c) => c.hexValue)
+      return this.nuances.map((c) => c.hexValue)
     },
     colorRgbList() {
-      return this.variations
+      return this.nuances
         .map((c) => kwulers.getRGBFromHex(c.hexValue))
         .map((rgb) => `rgb(${rgb.join(`, `)})`)
     },
     cmykList() {
-      return this.variations.map((c) => {
+      return this.nuances.map((c) => {
         return kwulers
           .getCMYKFromHex(c.hexValue)
 
@@ -38,10 +38,10 @@ export default {
       return this.cmykList.map((cmyk) => `cmyk(${cmyk.join(`, `)})`)
     },
     colorMeaningfulCss() {
-      return this.variations.map((c) => `--${c.meaningfulName}: ${c.hexValue};`)
+      return this.nuances.map((c) => `--${c.meaningfulName}: ${c.hexValue};`)
     },
     colorCss() {
-      return this.variations.map((c) => `--${c.name}: ${c.hexValue};`)
+      return this.nuances.map((c) => `--${c.name}: ${c.hexValue};`)
     },
   },
   methods: {
@@ -63,7 +63,10 @@ export default {
 <template>
   <aside v-if="open" class="ts-color-detail">
     <dl class="ts-color-detail__content">
-      <dt class="ts-color-detail__header">
+      <dt
+        class="ts-color-detail__header"
+        :style="{ background: nuances[0].hex }"
+      >
         <h3 class="ts-color-detail__name" :style="{ color: color.hexCode }">
           {{ color.name }} <small>({{ color.hexCode }})</small>
         </h3>
@@ -77,9 +80,9 @@ export default {
         </tc-button>
       </dt>
       <dd class="ts-color-detail__svg">
-        <tc-nuances-svg ref="svg" :color="color" :nuances="variations" />
+        <tc-nuances-svg ref="svg" :color="color" :nuances="nuances" />
         <tc-button class="ts-color-detail__download-svg" @click="downloadSvg">
-          download
+          download SVG
         </tc-button>
       </dd>
       <dd class="ts-color-detail__values">
