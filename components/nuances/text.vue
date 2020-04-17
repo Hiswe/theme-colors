@@ -7,11 +7,14 @@ export default {
     nuances: { type: Array, default: () => [] },
   },
   computed: {
+    _nuances() {
+      return this.nuances.map((n) => n[this.keyName])
+    },
     copyContent() {
-      return this.nuances.join(`\n`)
+      return this._nuances.join(`\n`)
     },
     htmlContent() {
-      return this.nuances.join(`<br />`)
+      return this._nuances.join(`<br />`)
     },
   },
 }

@@ -1,7 +1,5 @@
 <script>
 import slugify from '@sindresorhus/slugify'
-// https://markrabey.github.io/kwulers/
-import * as kwulers from 'kwulers'
 
 import * as colorsHelpers from '~/helpers/colors.js'
 import TcNuancesText from '~/components/nuances/text.vue'
@@ -17,31 +15,6 @@ export default {
   computed: {
     nuances() {
       return colorsHelpers.generateColorVariations(this.color)
-    },
-    colorHexList() {
-      return this.nuances.map((c) => c.hexValue)
-    },
-    colorRgbList() {
-      return this.nuances
-        .map((c) => kwulers.getRGBFromHex(c.hexValue))
-        .map((rgb) => `rgb(${rgb.join(`, `)})`)
-    },
-    cmykList() {
-      return this.nuances.map((c) => {
-        return kwulers
-          .getCMYKFromHex(c.hexValue)
-
-          .map((value) => (Number.isNaN(value) ? 100 : Math.round(value * 100)))
-      })
-    },
-    colorCmykList() {
-      return this.cmykList.map((cmyk) => `cmyk(${cmyk.join(`, `)})`)
-    },
-    colorMeaningfulCss() {
-      return this.nuances.map((c) => `--${c.meaningfulName}: ${c.hexValue};`)
-    },
-    colorCss() {
-      return this.nuances.map((c) => `--${c.name}: ${c.hexValue};`)
     },
   },
   methods: {
@@ -90,32 +63,32 @@ export default {
           class="ts-color-detail__section"
           title="Colors (HEX)"
           key-name="hex"
-          :nuances="colorHexList"
+          :nuances="nuances"
         />
         <tc-nuances-text
           class="ts-color-detail__section"
           title="Colors (RGB)"
           key-name="rgb"
-          :nuances="colorRgbList"
+          :nuances="nuances"
         />
         <tc-nuances-text
           class="ts-color-detail__section"
           title="Colors (CMYK)"
           key-name="cmyk"
-          :nuances="colorCmykList"
+          :nuances="nuances"
         />
         <tc-nuances-text
           class="ts-color-detail__section"
           title="CSS (meaningful)"
-          key-name="cssNameMeaningful"
-          :nuances="colorMeaningfulCss"
+          key-name="cssVarMeaningful"
+          :nuances="nuances"
         />
         <div class="ts-color-detail__section"></div>
         <tc-nuances-text
           class="ts-color-detail__section"
           title="CSS"
-          key-name="cssName"
-          :nuances="colorCss"
+          key-name="cssVar"
+          :nuances="nuances"
         />
       </dd>
     </dl>

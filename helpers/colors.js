@@ -51,14 +51,18 @@ export function generateColorVariations(color = {}) {
     const cmykVal = kwulers
       .getCMYKFromHex(hexValue)
       .map((value) => (Number.isNaN(value) ? 100 : Math.round(value * 100)))
+    const name = `${color.name}-${nuanceNames.name}`
+    const meaningfulName = `${color.name}${nuanceNames.meaningfulName}`
     return {
       name: `${color.name}-${nuanceNames.name}`,
-      meaningfulName: `${color.name}${nuanceNames.meaningfulName}`,
+      meaningfulName,
       nuanceNames,
       hexValue,
       hex: hexValue.toUpperCase(),
       rgb: `rgb(${rgbVal.join(`, `)})`,
       cmyk: `cmyk(${cmykVal.join(`, `)})`,
+      cssVar: `--${name}: ${hexValue};`,
+      cssVarMeaningful: `--${meaningfulName}: ${hexValue};`,
     }
   })
 }
