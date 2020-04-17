@@ -41,6 +41,7 @@ module.exports = {
     'import/extensions': [`error`, `always`],
     // we support [0-9] because of vue-18n name only
     'filenames/match-regex': [`error`, `^.?([a-z0-9]+)([a-z0-9.-]+)$`],
+    'vue/component-definition-name-casing': [`error`, `kebab-case`],
     // 'vue/max-len': [
     //   `error`,
     //   {

@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: `TcButton`,
+  name: `tc-button`,
   props: {
     to: { type: [Boolean, String], default: false },
     href: { type: [Boolean, String], default: false },

@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: `TcColorTextNuances`,
+  name: `tc-color-text-nuances`,
   props: {
     title: { type: String, default: `` },
     nuances: { type: Array, default: () => [] },

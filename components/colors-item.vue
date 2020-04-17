@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: `TcColorsItem`,
+  name: `tc-colors-item`,
   props: {
     color: { type: Object, default: () => ({}) },
     variation: { type: Object, default: () => ({}) },

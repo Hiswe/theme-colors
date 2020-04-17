@@ -3,7 +3,7 @@ import TcColorsList from '~/components/color-list.vue'
 import TsColorDetail from '~/components/color-detail.vue'
 
 export default {
-  name: `PageIndex`,
+  name: `page-index`,
   components: { TcColorsList, TsColorDetail },
   data() {
     return {

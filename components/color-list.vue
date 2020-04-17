@@ -3,7 +3,7 @@ import * as colorsHelpers from '~/helpers/colors.js'
 import TcColorsItem from '~/components/colors-item.vue'
 
 export default {
-  name: `TcColorsList`,
+  name: `tc-colors-list`,
   components: { TcColorsItem },
   model: { prop: `color`, event: `update` },
   props: { color: { type: Object, default: () => ({}) } },

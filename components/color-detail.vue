@@ -6,7 +6,7 @@ import * as colorsHelpers from '~/helpers/colors.js'
 import TcColorTestNuances from '~/components/color-text-nuances.vue'
 
 export default {
-  name: `TsColorDetail`,
+  name: `ts-color-detail`,
   components: { TcColorTestNuances },
   props: {
     color: { type: Object, default: () => ({}) },
