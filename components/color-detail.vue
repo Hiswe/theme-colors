@@ -115,7 +115,7 @@ export default {
   left: var(--panel-gutter);
   background: white;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: min-content minmax(0, 1fr);
   grid-template-rows: min-content minmax(0, 1fr);
 }
 .ts-color-detail__close-button {
