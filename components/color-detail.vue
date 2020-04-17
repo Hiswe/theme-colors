@@ -55,7 +55,14 @@ export default {
       <dt class="ts-color-detail__left-bar">
         <h3 class="ts-color-detail__name">{{ color.name }}</h3>
         <p>{{ color.baseColor }}</p>
-        <button @click="$emit(`close`)">close</button>
+        <tc-button
+          class="ts-color-detail__close-button"
+          outline
+          color="accent"
+          @click="$emit(`close`)"
+        >
+          <tc-icon name="close" />
+        </tc-button>
       </dt>
       <dd class="ts-color-detail__values">
         <tc-color-test-nuances
@@ -109,6 +116,16 @@ export default {
   background: white;
   display: flex;
   padding: 2rem;
+}
+.ts-color-detail__close-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  height: 2rem;
+  width: 2rem;
+  padding: 0;
 }
 /* LEFT BAR */
 .ts-color-detail__left-bar {

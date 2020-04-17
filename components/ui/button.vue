@@ -4,6 +4,7 @@ export default {
   props: {
     to: { type: [Boolean, String], default: false },
     href: { type: [Boolean, String], default: false },
+    color: { type: String, default: `primary` },
     outline: { type: Boolean, default: false },
     small: { type: Boolean, default: false },
     large: { type: Boolean, default: false },
@@ -46,7 +47,7 @@ export default {
 </script>
 
 <style scoped>
-.pio-button {
+.tc-button {
   --tc-button-bg: var(--c-primary);
   --tc-button-color: white;
   --tc-button-border-color: var(--button-border-color, var(--c-primary));
@@ -71,23 +72,32 @@ export default {
   cursor: pointer;
   outline: none;
 }
-.pio-button--small {
+.tc-button--small {
   padding: 0 0.5rem;
 }
-.pio-button--large {
+.tc-button--large {
   padding: 0.75rem 1.5rem;
 }
-.pio-button--outline {
+.tc-button--accent {
+  --button-bg: var(--c-accent);
+  --button-border-color: var(--c-accent);
+  --button-color: white;
+}
+.tc-button--accent:hover {
+  --button-bg: var(--c-accent);
+  --button-border-color: var(--c-accent);
+}
+.tc-button--outline {
   background-color: var(--button-bg-outline, white);
   color: var(--button-bg, var(--tc-button-bg));
   --button-border-color: var(--button-bg, var(--tc-button-bg));
   --button-border: 2px solid var(--button-border-color);
 }
-.pio-button--outline:hover {
+.tc-button--outline:hover {
   background-color: var(--button-bg);
   color: var(--button-color);
 }
-.pio-button--disabled {
+.tc-button--disabled {
   pointer-events: none;
   opacity: 0.5;
 }
