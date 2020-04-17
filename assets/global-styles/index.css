@@ -1,5 +1,6 @@
 :root {
   --header-height: 3rem;
+  --transition-duration: 0.2s;
 }
 
 *,
