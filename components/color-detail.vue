@@ -63,7 +63,7 @@ export default {
         </tc-button>
       </dt>
       <dd class="ts-color-detail__values">
-        <tc-nuances-svg :nuances="variations" />
+        <tc-nuances-svg :color="color" :nuances="variations" />
       </dd>
       <dd class="ts-color-detail__values">
         <tc-nuances-text

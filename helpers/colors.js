@@ -56,7 +56,7 @@ export function generateColorVariations(color = {}) {
       meaningfulName: `${color.name}${nuanceNames.meaningfulName}`,
       nuanceNames,
       hexValue,
-      hex: hexValue,
+      hex: hexValue.toUpperCase(),
       rgb: `rgb(${rgbVal.join(`, `)})`,
       cmyk: `cmyk(${cmykVal.join(`, `)})`,
     }
