@@ -62,7 +62,7 @@ export default {
           <tc-icon name="close" />
         </tc-button>
       </dt>
-      <dd class="ts-color-detail__values">
+      <dd class="ts-color-detail__svg">
         <tc-nuances-svg :color="color" :nuances="variations" />
       </dd>
       <dd class="ts-color-detail__values">
@@ -151,6 +151,17 @@ export default {
   font-weight: 500;
 }
 /* MAIN CONTENT */
+.ts-color-detail__svg {
+  padding: var(--pannel-padding);
+  margin: 0;
+  object-fit: contain;
+  text-align: left;
+}
+.tc-nuances-svg {
+  display: block;
+  height: 100%;
+  width: auto;
+}
 .ts-color-detail__values {
   display: flex;
   flex-wrap: wrap;
