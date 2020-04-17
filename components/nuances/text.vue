@@ -1,8 +1,9 @@
 <script>
 export default {
-  name: `tc-color-text-nuances`,
+  name: `tc-nuances-text`,
   props: {
     title: { type: String, default: `` },
+    keyName: { type: String, required: true },
     nuances: { type: Array, default: () => [] },
   },
   computed: {
@@ -17,12 +18,12 @@ export default {
 </script>
 
 <template>
-  <div class="tc-color-text-nuances">
-    <header class="tc-color-text-nuances__header">
-      <h5 class="tc-color-text-nuances__title" v-text="title" />
+  <div class="tc-nuances-text">
+    <header class="tc-nuances-text__header">
+      <h5 class="tc-nuances-text__title" v-text="title" />
       <button
         v-clipboard:copy="copyContent"
-        class="tc-color-text-nuances__button-copy"
+        class="tc-nuances-text__button-copy"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -38,23 +39,23 @@ export default {
       </button>
     </header>
     <!-- eslint-disable-next-line vue/no-v-html -->
-    <p class="tc-color-text-nuances__list" v-html="htmlContent" />
+    <p class="tc-nuances-text__list" v-html="htmlContent" />
   </div>
 </template>
 
 <style scoped>
-.tc-color-text-nuances__header {
+.tc-nuances-text__header {
   display: flex;
   align-items: center;
 }
-.tc-color-text-nuances__title {
+.tc-nuances-text__title {
   margin: 0 1rem 0 0;
 }
-.tc-color-text-nuances__button-copy svg {
+.tc-nuances-text__button-copy svg {
   height: 1rem;
   width: auto;
 }
-.tc-color-text-nuances__list {
+.tc-nuances-text__list {
   white-space: nowrap;
 }
 </style>

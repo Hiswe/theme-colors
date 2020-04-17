@@ -1,20 +1,22 @@
+// https://markrabey.github.io/kwulers/
+import * as kwulers from 'kwulers'
 // import the same Vuetify colors helpers for coherent branding
 import * as colorUtils from 'vuetify/es5/util/colorUtils.js'
 import * as LAB from 'vuetify/es5/util/color/transformCIELAB.js'
 import * as sRGB from 'vuetify/es5/util/color/transformSRGB.js'
 
 const COLOR_INDEX_TO_MEANINGFUL_NAME = [
-  `whitest`,
-  `whiter`,
-  `white`,
-  `lightest`,
-  `lighter`,
-  `base`,
-  `darker`,
-  `darkest`,
-  `black,`,
-  `blacker`,
-  `blackest`,
+  `-whitest`,
+  `-whiter`,
+  `-white`,
+  `-lightest`,
+  `-lighter`,
+  ``,
+  `-darker`,
+  `-darkest`,
+  `-black,`,
+  `-blacker`,
+  `-blackest`,
 ]
 
 function getNuanceNames(nuanceIndex) {
@@ -44,11 +46,19 @@ export function generateColorVariations(color = {}) {
   }
   return variations.map((hexValue, nuanceIndex) => {
     const nuanceNames = getNuanceNames(nuanceIndex)
+    const rgbVal = kwulers.getRGBFromHex(hexValue)
+    // sometimes value is NaN (full mega black)
+    const cmykVal = kwulers
+      .getCMYKFromHex(hexValue)
+      .map((value) => (Number.isNaN(value) ? 100 : Math.round(value * 100)))
     return {
       name: `${color.name}-${nuanceNames.name}`,
-      meaningfulName: `${color.name}-${nuanceNames.meaningfulName}`,
+      meaningfulName: `${color.name}${nuanceNames.meaningfulName}`,
       nuanceNames,
       hexValue,
+      hex: hexValue,
+      rgb: `rgb(${rgbVal.join(`, `)})`,
+      cmyk: `cmyk(${cmykVal.join(`, `)})`,
     }
   })
 }

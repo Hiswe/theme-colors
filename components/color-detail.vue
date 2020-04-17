@@ -3,11 +3,12 @@
 import * as kwulers from 'kwulers'
 
 import * as colorsHelpers from '~/helpers/colors.js'
-import TcColorTestNuances from '~/components/color-text-nuances.vue'
+import TcNuancesText from '~/components/nuances/text.vue'
+import TcNuancesSvg from '~/components/nuances/svg.vue'
 
 export default {
   name: `ts-color-detail`,
-  components: { TcColorTestNuances },
+  components: { TcNuancesText, TcNuancesSvg },
   props: {
     color: { type: Object, default: () => ({}) },
     open: { type: Boolean, default: false },
@@ -26,14 +27,10 @@ export default {
     },
     cmykList() {
       return this.variations.map((c) => {
-        return (
-          kwulers
-            .getCMYKFromHex(c.hexValue)
-            // sometimes value is NaN (full mega black)
-            .map((value) =>
-              Number.isNaN(value) ? 100 : Math.round(value * 100),
-            )
-        )
+        return kwulers
+          .getCMYKFromHex(c.hexValue)
+
+          .map((value) => (Number.isNaN(value) ? 100 : Math.round(value * 100)))
       })
     },
     colorCmykList() {
@@ -52,9 +49,10 @@ export default {
 <template>
   <aside v-if="open" class="ts-color-detail">
     <dl class="ts-color-detail__content">
-      <dt class="ts-color-detail__left-bar">
-        <h3 class="ts-color-detail__name">{{ color.name }}</h3>
-        <p>{{ color.baseColor }}</p>
+      <dt class="ts-color-detail__header">
+        <h3 class="ts-color-detail__name" :style="{ color: color.hexCode }">
+          {{ color.name }} <small>({{ color.hexCode }})</small>
+        </h3>
         <tc-button
           class="ts-color-detail__close-button"
           outline
@@ -65,30 +63,38 @@ export default {
         </tc-button>
       </dt>
       <dd class="ts-color-detail__values">
-        <tc-color-test-nuances
+        <tc-nuances-svg :nuances="variations" />
+      </dd>
+      <dd class="ts-color-detail__values">
+        <tc-nuances-text
           class="ts-color-detail__section"
           title="Colors (HEX)"
+          key-name="hex"
           :nuances="colorHexList"
         />
-        <tc-color-test-nuances
+        <tc-nuances-text
           class="ts-color-detail__section"
           title="Colors (RGB)"
+          key-name="rgb"
           :nuances="colorRgbList"
         />
-        <tc-color-test-nuances
+        <tc-nuances-text
           class="ts-color-detail__section"
           title="Colors (CMYK)"
+          key-name="cmyk"
           :nuances="colorCmykList"
         />
-        <tc-color-test-nuances
+        <tc-nuances-text
           class="ts-color-detail__section"
           title="CSS (meaningful)"
+          key-name="cssNameMeaningful"
           :nuances="colorMeaningfulCss"
         />
         <div class="ts-color-detail__section"></div>
-        <tc-color-test-nuances
+        <tc-nuances-text
           class="ts-color-detail__section"
           title="CSS"
+          key-name="cssName"
           :nuances="colorCss"
         />
       </dd>
@@ -99,6 +105,7 @@ export default {
 <style scoped>
 .ts-color-detail {
   --panel-gutter: 2rem;
+  --pannel-padding: var(--panel-gutter);
   --panel-left-width: 12rem;
   position: fixed;
   top: 0;
@@ -114,8 +121,9 @@ export default {
   bottom: var(--panel-gutter);
   left: var(--panel-gutter);
   background: white;
-  display: flex;
-  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: min-content minmax(0, 1fr);
 }
 .ts-color-detail__close-button {
   position: absolute;
@@ -128,18 +136,26 @@ export default {
   padding: 0;
 }
 /* LEFT BAR */
-.ts-color-detail__left-bar {
-  width: var(--panel-left-width);
-  flex: 0 0 var(--panel-left-width);
-  font-size: 1rem;
+.ts-color-detail__header {
+  background: var(--c-primary-lightest);
+  padding: calc(var(--pannel-padding) / 2) var(--pannel-padding);
+  grid-column: span 2;
 }
 .ts-color-detail__name {
   margin-top: 0;
+  font-size: 3rem;
+  font-weight: 900;
+  margin: 0;
+}
+.ts-color-detail__name small {
+  font-weight: 500;
 }
 /* MAIN CONTENT */
 .ts-color-detail__values {
   display: flex;
-  flex: 1 0 0;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: var(--pannel-padding);
 }
 .ts-color-detail__section {
   flex: 1 0 0;
