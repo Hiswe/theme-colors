@@ -4,7 +4,7 @@
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ yarn install
 
@@ -20,3 +20,7 @@ $ yarn generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+- https://github.com/theKashey/rewiremock
+- https://www.npmjs.com/package/idb-keyval
+- https://www.npmjs.com/package/idb
