@@ -3,4 +3,5 @@
 export default {
   require: [`./test/_setup.js`],
   babel: true,
+  snapshotDir: `__snapshots__`,
 }
