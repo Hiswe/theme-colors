@@ -1,16 +1,6 @@
+// https://github.com/vinayakkulkarni/nuxt-ava-e2e-unit-testing
+
 export default {
   require: [`./test/_setup.js`],
   babel: true,
-  // babel: {
-  //   testOptions: {
-  //     plugins: [
-  //       [
-  //         `babel-plugin-webpack-alias-7`,
-  //         {
-  //           config: `./webpack.config.test.js`,
-  //         },
-  //       ],
-  //     ],
-  //   },
-  // },
 }
