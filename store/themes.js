@@ -4,6 +4,7 @@ export const THEMES = `themes`
 
 export const state = () => {
   return {
+    colorDetail: false,
     list: [
       {
         id: `lgP5L-1aj4BrJbaZ-UDVh"`,
@@ -123,15 +124,17 @@ export const state = () => {
   }
 }
 
-// export const LOCALE = `LOCALE`
+export const COLOR_DETAIL_OPEN = `COLOR_DETAIL_OPEN`
 
 export const getters = {
-  // [LOCALE](state) {
-  //   return state.info.locale || SUPPORTED_LOCALES[0]
-  // },
+  [COLOR_DETAIL_OPEN](state) {
+    return state.colorDetail !== false
+  },
 }
 
 const M_SET_COLOR = `M_SET_COLOR`
+const M_SHOW_DETAIL_COLOR = `M_SHOW_DETAIL_COLOR`
+const M_HIDE_DETAIL_COLOR = `M_HIDE_DETAIL_COLOR`
 
 export const mutations = {
   [M_SET_COLOR](state, { themeId, color }) {
@@ -141,13 +144,29 @@ export const mutations = {
     )
     Vue.set(theme.colors, colorIndex, color)
   },
+  [M_SHOW_DETAIL_COLOR](state, { color }) {
+    state.colorDetail = color
+  },
+  [M_HIDE_DETAIL_COLOR](state) {
+    state.colorDetail = false
+  },
 }
 
 export const SET_COLOR = `SET_COLOR`
+export const SHOW_DETAIL_COLOR = `SHOW_DETAIL_COLOR`
+export const HIDE_DETAIL_COLOR = `HIDE_DETAIL_COLOR`
 
 export const actions = {
   [SET_COLOR](vuexCtx, { themeId, color }) {
     const { commit } = vuexCtx
     commit(M_SET_COLOR, { themeId, color })
+  },
+  [SHOW_DETAIL_COLOR](vuexCtx, { color }) {
+    const { commit } = vuexCtx
+    commit(M_SHOW_DETAIL_COLOR, { color })
+  },
+  [HIDE_DETAIL_COLOR](vuexCtx) {
+    const { commit } = vuexCtx
+    commit(M_HIDE_DETAIL_COLOR)
   },
 }

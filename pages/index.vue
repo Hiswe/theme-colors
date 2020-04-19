@@ -1,7 +1,7 @@
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
-import { THEMES } from '~/store/themes.js'
+import { THEMES, COLOR_DETAIL_OPEN } from '~/store/themes.js'
 import TcTheme from '~/components/theme.vue'
 import TsColorDetail from '~/components/color-detail.vue'
 
@@ -10,33 +10,22 @@ export default {
   components: { TcTheme, TsColorDetail },
   data() {
     return {
-      loading: false,
-      colorDetailOpen: false,
-      colorDetail: {},
       isGrey: false,
     }
   },
   computed: {
     mainClasses() {
-      return { 'container--blurred': this.colorDetailOpen }
+      return { 'main--blurred': this.colorDetailOpen }
     },
     nuancesClasses() {
       return { 'nuances--grey': this.isGrey }
     },
+    ...mapGetters(THEMES, {
+      colorDetailOpen: COLOR_DETAIL_OPEN,
+    }),
     ...mapState(THEMES, {
       themes: (state) => state.list,
     }),
-  },
-  methods: {
-    showNuances(color) {
-      this.colorDetail = color
-      this.colorDetailOpen = true
-    },
-
-    hideNuances() {
-      this.colorDetailOpen = false
-      this.colorDetail = {}
-    },
   },
 }
 </script>
@@ -65,11 +54,7 @@ export default {
         />
       </div>
     </main>
-    <ts-color-detail
-      :open="colorDetailOpen"
-      :color="colorDetail"
-      @close="hideNuances"
-    />
+    <ts-color-detail />
   </div>
 </template>
 

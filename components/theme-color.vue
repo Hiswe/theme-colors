@@ -1,7 +1,7 @@
 <script>
 import { mapActions } from 'vuex'
 
-import { THEMES, SET_COLOR } from '~/store/themes.js'
+import { THEMES, SET_COLOR, SHOW_DETAIL_COLOR } from '~/store/themes.js'
 import * as colorsHelpers from '~/helpers/colors.js'
 import TcColorsItem from '~/components/colors-item.vue'
 
@@ -22,6 +22,9 @@ export default {
     },
   },
   methods: {
+    onColorDetail() {
+      this.showDetailColor({ color: this.color })
+    },
     onUpdateColor(hexCode) {
       const { themeId } = this
       this.setColor({ themeId, color: { ...this.color, hexCode } })
@@ -30,7 +33,10 @@ export default {
       const { themeId } = this
       this.setColor({ themeId, color: { ...this.color, index } })
     },
-    ...mapActions(THEMES, { setColor: SET_COLOR }),
+    ...mapActions(THEMES, {
+      setColor: SET_COLOR,
+      showDetailColor: SHOW_DETAIL_COLOR,
+    }),
   },
 }
 </script>
@@ -39,9 +45,9 @@ export default {
   <dl class="tc-theme-color">
     <dt class="tc-theme-color__header">
       <p>{{ color.name }}</p>
-      <button @click="$emit(`theme`, color)">
+      <tc-button outline small @click="onColorDetail">
         <tc-icon name="visibility" />
-      </button>
+      </tc-button>
     </dt>
     <dd class="tc-theme-color__content">
       <ol class="tc-theme-color__list">

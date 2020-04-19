@@ -1,6 +1,8 @@
 <script>
 import slugify from '@sindresorhus/slugify'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
+import { THEMES, COLOR_DETAIL_OPEN, HIDE_DETAIL_COLOR } from '~/store/themes.js'
 import * as colorsHelpers from '~/helpers/colors.js'
 import TcNuancesText from '~/components/nuances/text.vue'
 import TcNuancesSvg from '~/components/nuances/svg.vue'
@@ -8,14 +10,16 @@ import TcNuancesSvg from '~/components/nuances/svg.vue'
 export default {
   name: `ts-color-detail`,
   components: { TcNuancesText, TcNuancesSvg },
-  props: {
-    color: { type: Object, default: () => ({}) },
-    open: { type: Boolean, default: false },
-  },
   computed: {
     nuances() {
       return colorsHelpers.generateColorVariations(this.color)
     },
+    ...mapGetters(THEMES, {
+      colorDetailOpen: COLOR_DETAIL_OPEN,
+    }),
+    ...mapState(THEMES, {
+      color: (state) => state.colorDetail,
+    }),
   },
   methods: {
     // https://stackoverflow.com/a/20194533
@@ -29,12 +33,15 @@ export default {
       a.click()
       document.body.removeChild(a)
     },
+    ...mapActions(THEMES, {
+      hideDetailColor: HIDE_DETAIL_COLOR,
+    }),
   },
 }
 </script>
 
 <template>
-  <aside v-if="open" class="ts-color-detail">
+  <aside v-if="colorDetailOpen" class="ts-color-detail">
     <dl class="ts-color-detail__content">
       <dt
         class="ts-color-detail__header"
@@ -47,7 +54,7 @@ export default {
           class="ts-color-detail__close-button"
           outline
           color="accent"
-          @click="$emit(`close`)"
+          @click="hideDetailColor"
         >
           <tc-icon name="close" />
         </tc-button>
