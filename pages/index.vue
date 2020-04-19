@@ -1,28 +1,21 @@
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
-import { THEMES, COLOR_DETAIL_OPEN } from '~/store/themes.js'
+import { THEMES } from '~/store/themes.js'
 import TcTheme from '~/components/theme.vue'
-import TsColorDetail from '~/components/color-detail.vue'
 
 export default {
   name: `page-index`,
-  components: { TcTheme, TsColorDetail },
+  components: { TcTheme },
   data() {
     return {
       isGrey: false,
     }
   },
   computed: {
-    mainClasses() {
-      return { 'main--blurred': this.colorDetailOpen }
-    },
     nuancesClasses() {
       return { 'nuances--grey': this.isGrey }
     },
-    ...mapGetters(THEMES, {
-      colorDetailOpen: COLOR_DETAIL_OPEN,
-    }),
     ...mapState(THEMES, {
       themes: (state) => state.list,
     }),
@@ -31,51 +24,31 @@ export default {
 </script>
 
 <template>
-  <div class="container">
-    <main class="main" :class="mainClasses">
-      <header class="header">
-        <label>
-          <input
-            id="grey-toggle"
-            v-model="isGrey"
-            type="checkbox"
-            name="grey-toggle"
-          />
-          check grey values
-        </label>
-      </header>
-      <div class="themes" :class="nuancesClasses">
-        <tc-theme
-          v-for="theme in themes"
-          :key="theme.id"
-          :theme="theme"
-          :style="`flex: ${theme.colors.length};`"
-          class="themes__item"
+  <tc-main :class="mainClasses">
+    <template #header>
+      <label>
+        <input
+          id="grey-toggle"
+          v-model="isGrey"
+          type="checkbox"
+          name="grey-toggle"
         />
-      </div>
-    </main>
-    <ts-color-detail />
-  </div>
+        check grey values
+      </label>
+    </template>
+    <div class="themes" :class="nuancesClasses">
+      <tc-theme
+        v-for="theme in themes"
+        :key="theme.id"
+        :theme="theme"
+        :style="`flex: ${theme.colors.length};`"
+        class="themes__item"
+      />
+    </div>
+  </tc-main>
 </template>
 
 <style scoped>
-.main {
-  margin: 0 auto;
-  min-height: 100vh;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-}
-.main--blurred {
-  filter: blur(2px);
-}
-.header {
-  background: #333;
-  text-align: right;
-  padding: 1rem;
-  color: white;
-  height: var(--header-height);
-}
 .themes {
   display: flex;
   margin: 0rem;

@@ -1,7 +1,7 @@
 <script>
 import { mapActions } from 'vuex'
 
-import { THEMES, SET_COLOR, SHOW_DETAIL_COLOR } from '~/store/themes.js'
+import { THEMES, SET_COLOR } from '~/store/themes.js'
 import * as colorsHelpers from '~/helpers/colors.js'
 import TcColorsItem from '~/components/colors-item.vue'
 
@@ -14,17 +14,14 @@ export default {
     color: { type: Object, default: () => ({}) },
   },
   computed: {
-    isValid() {
-      return true
-    },
     variations() {
       return colorsHelpers.generateColorVariations(this.color)
     },
+    colorUrl() {
+      return `/themes/${this.themeId}/colors/${this.color.id}`
+    },
   },
   methods: {
-    onColorDetail() {
-      this.showDetailColor({ color: this.color })
-    },
     onUpdateColor(hexCode) {
       const { themeId } = this
       this.setColor({ themeId, color: { ...this.color, hexCode } })
@@ -35,7 +32,6 @@ export default {
     },
     ...mapActions(THEMES, {
       setColor: SET_COLOR,
-      showDetailColor: SHOW_DETAIL_COLOR,
     }),
   },
 }
@@ -44,10 +40,9 @@ export default {
 <template>
   <dl class="tc-theme-color">
     <dt class="tc-theme-color__header">
-      <p>{{ color.name }}</p>
-      <tc-button outline small @click="onColorDetail">
-        <tc-icon name="visibility" />
-      </tc-button>
+      <nuxt-link class="tc-theme-color__color-link" :to="colorUrl">{{
+        color.name
+      }}</nuxt-link>
     </dt>
     <dd class="tc-theme-color__content">
       <ol class="tc-theme-color__list">
@@ -78,8 +73,12 @@ export default {
 }
 .tc-theme-color__header {
   flex: 0 0 auto;
+  padding: 0.5rem;
   background: #222;
   color: white;
+}
+.tc-theme-color__color-link {
+  color: currentColor;
 }
 .tc-theme-color__content {
   display: contents;

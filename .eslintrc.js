@@ -70,17 +70,14 @@ module.exports = {
     //   },
     // ],
   },
-  // overrides: [
-  //   {
-  //     files: ['app_vue/pages/**/*.vue'],
-  //     rules: {
-  //       // because of nuxt: https://nuxtjs.org/guide/directory-structure/
-  //       'filenames/match-regex': [
-  //         `error`,
-  //         `^([_a-zA-Z0-9]+)([a-zA-Z0-9\.-]+)$`,
-  //       ],
-  //     },
-  //   },
-  // ],
+  overrides: [
+    {
+      files: [`pages/**/*.vue`],
+      rules: {
+        // because of nuxt: https://nuxtjs.org/guide/directory-structure/
+        'filenames/match-regex': [`error`, `^([_a-zA-Z0-9]+)([a-zA-Z0-9.-]+)$`],
+      },
+    },
+  ],
   ignorePatterns: [`/.nuxt`, `/dist`],
 }
