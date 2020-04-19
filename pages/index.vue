@@ -3,10 +3,11 @@ import { mapState } from 'vuex'
 
 import { THEMES } from '~/store/themes.js'
 import TcTheme from '~/components/theme.vue'
+import TcGreyscaleToggle from '~/components/greyscale-toggle.vue'
 
 export default {
   name: `page-index`,
-  components: { TcTheme },
+  components: { TcTheme, TcGreyscaleToggle },
   data() {
     return {
       isGrey: false,
@@ -26,15 +27,7 @@ export default {
 <template>
   <tc-main :class="mainClasses">
     <template #header>
-      <label>
-        <input
-          id="grey-toggle"
-          v-model="isGrey"
-          type="checkbox"
-          name="grey-toggle"
-        />
-        check grey values
-      </label>
+      <tc-greyscale-toggle v-model="isGrey" />
     </template>
     <div class="themes" :class="nuancesClasses">
       <tc-theme

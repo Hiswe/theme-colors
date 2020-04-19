@@ -3,11 +3,20 @@ import { mapGetters } from 'vuex'
 
 import { THEMES, GET_THEME } from '~/store/themes.js'
 import TsThemeColor from '~/components/theme-color.vue'
+import TcGreyscaleToggle from '~/components/greyscale-toggle.vue'
 
 export default {
   name: `page-theme`,
-  components: { TsThemeColor },
+  components: { TsThemeColor, TcGreyscaleToggle },
+  data() {
+    return {
+      isGrey: false,
+    }
+  },
   computed: {
+    colorsClasses() {
+      return { 'page-theme__colors--grey': this.isGrey }
+    },
     theme() {
       return this.getTheme(this.$route.params)
     },
@@ -20,8 +29,11 @@ export default {
 
 <template>
   <tc-main class="page-theme">
+    <template #header>
+      <tc-greyscale-toggle v-model="isGrey" />
+    </template>
     <h2 class="page-theme__title">{{ theme.name }}</h2>
-    <div class="page-theme__colors">
+    <div class="page-theme__colors" :class="colorsClasses">
       <ts-theme-color
         v-for="color in theme.colors"
         :key="color.id"
@@ -42,5 +54,8 @@ export default {
 .page-theme__colors {
   display: flex;
   flex: 1;
+}
+.page-theme__colors--grey {
+  filter: grayscale();
 }
 </style>
