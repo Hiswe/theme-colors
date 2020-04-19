@@ -124,10 +124,14 @@ export const state = () => {
   }
 }
 
-export const THEME_COLOR = `THEME_COLOR`
+export const GET_THEME_COLOR = `GET_THEME_COLOR`
+export const GET_THEME = `GET_THEME`
 
 export const getters = {
-  [THEME_COLOR]: (state) => ({ themeId, colorId }) => {
+  [GET_THEME]: (state) => ({ themeId }) => {
+    return state.list.find((theme) => theme.id === themeId)
+  },
+  [GET_THEME_COLOR]: (state) => ({ themeId, colorId }) => {
     const theme = state.list.find((theme) => theme.id === themeId)
     return theme.colors.find((themeColor) => themeColor.id === colorId)
   },

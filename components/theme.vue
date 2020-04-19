@@ -7,12 +7,21 @@ export default {
   props: {
     theme: { type: Object, default: () => ({}) },
   },
+  computed: {
+    themeUrl() {
+      return `/themes/${this.theme.id}`
+    },
+  },
 }
 </script>
 
 <template>
   <dl class="tc-theme">
-    <dt class="tc-theme__name">{{ theme.name }}</dt>
+    <dt class="tc-theme__name">
+      <nuxt-link class="tc-theme__link" :to="themeUrl">
+        {{ theme.name }}
+      </nuxt-link>
+    </dt>
     <dd class="tc-theme__colors">
       <ts-theme-color
         v-for="color in theme.colors"
@@ -39,6 +48,9 @@ export default {
   flex: 0 0 auto;
   padding: 0.5rem 0;
   font-size: 1.5rem;
+}
+.tc-theme__link {
+  color: currentColor;
 }
 .tc-theme__colors {
   display: flex;

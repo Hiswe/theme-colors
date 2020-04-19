@@ -2,7 +2,7 @@
 import slugify from '@sindresorhus/slugify'
 import { mapGetters } from 'vuex'
 
-import { THEMES, THEME_COLOR } from '~/store/themes.js'
+import { THEMES, GET_THEME_COLOR } from '~/store/themes.js'
 import * as colorsHelpers from '~/helpers/colors.js'
 import TcNuancesText from '~/components/nuances/text.vue'
 import TcNuancesSvg from '~/components/nuances/svg.vue'
@@ -15,10 +15,10 @@ export default {
       return colorsHelpers.generateColorVariations(this.color)
     },
     color() {
-      return this.themeColor(this.$route.params)
+      return this.getThemeColor(this.$route.params)
     },
     ...mapGetters(THEMES, {
-      themeColor: THEME_COLOR,
+      getThemeColor: GET_THEME_COLOR,
     }),
   },
   methods: {
