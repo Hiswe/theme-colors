@@ -97,7 +97,7 @@ export default {
 .page-color__content {
   background: white;
   display: grid;
-  grid-template-columns: min-content minmax(0, 1fr);
+  grid-template-columns: max-content minmax(0, 1fr);
   grid-template-rows: min-content minmax(0, 1fr);
   flex: 1;
   margin: 0;
